@@ -4,7 +4,7 @@ author: "Gareth Rushgrove"
 branding:
   icon: "check"
   color: "green"
-inputs: 
+inputs:
   files:
     description: "Files or directories to validate"
     default: "."
@@ -15,27 +15,27 @@ inputs:
     description: "Version of Kubernetes to validate against"
     default: "master"
   strict:
-    description: "Whether to not to check for extra properties" 
+    description: "Whether to not to check for extra properties"
     default: true
   openshift:
-    description: "Whether to use the schemas from OpenShift rather than Kubernetes" 
+    description: "Whether to use the schemas from OpenShift rather than Kubernetes"
     default: false
   ignore_missing_schemas:
-    description: "Whether or not to skip custom resources" 
+    description: "Whether or not to skip custom resources"
     default: true
-  ignored_filename_patterns:
-    description: "List of regular expressions specifying filenames to ignore"
+  ignored_path_patterns:
+    description: "List of regular expressions specifying path to ignore"
     default: ""
 runs:
   using: 'docker'
-  image: 'docker://garethr/kubeval:latest'
+  image: 'docker://adamgolab/kubeval:latest'
   args:
   - -d
-  - ${{ inputs.files }} 
+  - ${{ inputs.files }}
   - -o
   - ${{ inputs.output }}
   - -i
-  - ${{ inputs.ignored_filename_patterns }}
+  - ${{ inputs.ignored_path_patterns }}
   - --strict=${{ inputs.strict }}
   - --kubernetes-version
   - ${{ inputs.version }}
