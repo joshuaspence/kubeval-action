@@ -23,6 +23,9 @@ inputs:
   ignore_missing_schemas:
     description: "Whether or not to skip custom resources" 
     default: true
+  additional_schema_locations:
+    description: "Comma-seperated list of secondary base URLs used to download schemas"
+    default: ""
 runs:
   using: 'docker'
   image: 'docker://garethr/kubeval:latest'
@@ -36,4 +39,5 @@ runs:
   - ${{ inputs.version }}
   - --openshift=${{ inputs.openshift }}
   - --ignore-missing-schemas=${{ inputs.ignore_missing_schemas }}
+  - --additional-schema-locations=${{ inputs.additional_schema_locations }}
 
